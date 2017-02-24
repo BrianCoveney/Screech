@@ -6,7 +6,9 @@
     <jsp:useBean id="ScreechBean" scope="session" class="main.java.beans.ScreechBean" />
     <jsp:setProperty name="ScreechBean" property="*" />
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Screech</title>
+
+    <jsp:setProperty name="ScreechBean" property="title" value="Screech Bean"></jsp:setProperty>
+    <title><jsp:getProperty name="ScreechBean" property="title"></jsp:getProperty></title>
 </head>
 <body>
 <form method="post">
@@ -18,12 +20,11 @@
         Enter Number of skid marks:<br>
         <input type="text" name="skidMarks"><br>
         <label>Enter type of road surface:</label><br>
-        <input type="radio" name="lang" value="Car">Protland Cement<br>
-        <input type="radio" name="lang" value="Motorcycle">Asphalt<br>
-        <input type="radio" name="lang" value="Motorcycle">Gravel<br>
-        <input type="radio" name="lang" value="Motorcycle">Ice<br>
-        <input type="radio" name="lang" value="Motorcycle">Ice<br>
-        <input type="radio" name="lang" value="Motorcycle">Snow<br>
+        <input type="radio" name="lang" value="Cement">Portland Cement<br>
+        <input type="radio" name="lang" value="Asphalt">Asphalt<br>
+        <input type="radio" name="lang" value="Gravel">Gravel<br>
+        <input type="radio" name="lang" value="Ice">Ice<br>>
+        <input type="radio" name="lang" value="Snow">Snow<br>
         <input type="submit" name="submit" type="submit" value="submit">
         The length of the skid is : <jsp:getProperty name="ScreechBean" property="skidLength" />
         The number of skid marks are : <jsp:getProperty name="ScreechBean" property="skidMarks" />

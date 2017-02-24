@@ -1,6 +1,5 @@
-package test;
+package main.java.beans;
 
-import main.java.beans.ScreechBean;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,12 +10,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
  * Created by brian on 24/02/17.
  */
 public class ScreechBeanTest {
-
-    private ScreechBean screechBean;
+    private main.java.beans.ScreechBean screechBean;
 
     @Before
     public void setUp() throws Exception {
-        screechBean = new ScreechBean();
+        screechBean = new main.java.beans.ScreechBean();
         screechBean.setSkidLength(50);
     }
 

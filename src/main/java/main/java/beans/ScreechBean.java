@@ -6,11 +6,13 @@ package main.java.beans;
 public class ScreechBean {
 
     // encapsulate properties / attributes of the class
+    private String title = "to be changed";
     private int skidLength = 0;
     private int skidMarks = 0;
 
 
-    // As we are not defining any parameterised constructors, java supplies a default no arg constructor
+
+// As we are not defining any parameterised constructors, java supplies a default no arg constructor
 
 
     // accessor method - allow the client to retrieve the state of the object
@@ -27,6 +29,14 @@ public class ScreechBean {
 
     public int getSkidMarks() {
         return skidMarks;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public boolean isNotZero() {
