@@ -1,18 +1,20 @@
-package main.java.beans;
+package test;
 
+import main.java.beans.ScreechBean;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
- * Created by brian on 23/02/17.
+ * Created by brian on 24/02/17.
  */
 public class ScreechBeanTest {
 
     private ScreechBean screechBean;
 
-    @org.junit.Before
+    @Before
     public void setUp() throws Exception {
         screechBean = new ScreechBean();
         screechBean.setSkidLength(50);
