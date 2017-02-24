@@ -30,8 +30,10 @@ import java.io.PrintWriter;
 public class ScreechServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    //30 = A constant value used in this equation.
+    // a constant value used in this equation.
     private static final int EQUATION_CONST = 30;
+    // array of road surface types
+    private String surfaceTypes[] = { "Cement", "Asphalt", "Gravel", "Ice", "Snow" };
 
 
     public ScreechServlet() {
@@ -40,17 +42,35 @@ public class ScreechServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        double skidLength = Integer.parseInt(request.getParameter("skidlength"));
+        double skidLength = Double.parseDouble(request.getParameter("skidlength"));
         int skidMark = Integer.parseInt(request.getParameter("skidmark"));
+        double averageSkidLength = 0.0;
         double dragFactor = 0.75;
         double breakingEfficiency = 1.0;
 
-        // get result from method below
-        double result = calculateSpeed(skidLength, dragFactor, breakingEfficiency);
 
-        // create html from method below
+//        String choice = request.getParameter("surface");
+
+
+        if(skidMark == 4) {
+            averageSkidLength = (skidLength * 4) / 4;
+        } else if(skidMark == 3) {
+            averageSkidLength = (skidLength * 3) / 3;
+        } else if(skidMark == 2) {
+            averageSkidLength = (skidLength * 2) / 2;
+        } else if(skidMark == 1) {
+            averageSkidLength = skidLength;
+        }
+
+        // get result from the method calculateSpeed(...)
+        double result = calculateSpeed(averageSkidLength, dragFactor, breakingEfficiency);
+
+
+        // create html from the method createHTMLDoc(...)
         StringBuffer stringBuffer = createHTMLDoc(result);
 
+
+        response.setContentType("text/html"); // content type
         PrintWriter printWriter = response.getWriter();
         printWriter.println(stringBuffer);
         printWriter.close();
@@ -58,9 +78,6 @@ public class ScreechServlet extends HttpServlet {
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String skLength = request.getParameter("skidlength");
-        PrintWriter pw = response.getWriter();
-        pw.println(skLength);
 
     }
 
@@ -75,11 +92,12 @@ public class ScreechServlet extends HttpServlet {
 
 
     // create and send HTML to the client
-    protected StringBuffer createHTMLDoc(double res) {
+    public StringBuffer createHTMLDoc(double res) {
         StringBuffer stringBuff = new StringBuffer();
-        stringBuff.append("<html><head><title>\n");
-        stringBuff.append("Screech GET Result\n");
-        stringBuff.append("</title></head><body>\n");
+        stringBuff.append("<html><head>\n");
+        stringBuff.append("<title>Screech GET Result</title>\n");
+        stringBuff.append("</head><body>\n");
+        stringBuff.append("<jsp:getProperty name='ScreechBean' property='skidMarks'/>");
         stringBuff.append("<h3>Base on your figures, the cars speed was:</h3>\n");
         stringBuff.append("<h3>" + res + "mph</h3>");
         stringBuff.append("</body></html>");
